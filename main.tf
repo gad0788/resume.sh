@@ -3,12 +3,14 @@ resource "aws_instance" "server" {
 ami = var.ami
   instance_type = "t2.micro"
   availability_zone = "us-east-1a"
+  security_groups = [ "web" ]
   key_name = "week7d2"
   user_data = file("resume.sh")
   tags = {
   Name = "Terraform-server"
   }
 }
+/*
 # Creating vpc
 resource "aws_vpc" "first-vpc" {
   cidr_block = var.vpc_cidir
@@ -16,6 +18,7 @@ resource "aws_vpc" "first-vpc" {
     name = "production"
   }
 }
+
 # Creating subnet-public
 resource "aws_subnet" "public1" {
   vpc_id     =aws_vpc.first-vpc.id
@@ -34,7 +37,7 @@ resource "aws_subnet" "private1" {
 }
 
 # 1. Creating vpc
-/*
+
 resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
   tags = {

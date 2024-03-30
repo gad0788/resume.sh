@@ -1,13 +1,12 @@
-#!/bin/bash
-
+#!/bin/bash -x
 sudo yum update -y
-sudo yum install git httpd wget -y
-sudo systemctl start httpd
-sudo systemctl enable httpd
-# sudo groupadd DevOps
-# sudo useradd Serge
-sudo yum install unzip  -y  #( apt install wget unzip -y )
-wget https://github.com/utrains/static-resume/archive/refs/heads/main.zip
-unzip main.zip
-cp -r static-resume-main/* /var/www/html/
-exit(0)
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+sudo yum upgrade -y
+## Install Java 11:
+sudo yum install java-11* -y
+## Install Jenkins then Enable the Jenkins service to start at boot :
+sudo yum install jenkins -y
+sudo systemctl enable jenkins
+## Start Jenkins as a service:
+sudo systemctl start jenkins
