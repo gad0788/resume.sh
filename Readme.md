@@ -1,0 +1,1 @@
+# ec2 using default value and keypair for ssh
